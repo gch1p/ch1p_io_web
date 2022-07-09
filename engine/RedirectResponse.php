@@ -2,9 +2,8 @@
 
 class RedirectResponse extends Response {
 
-    public function __construct(string $url) {
-        parent::__construct(301);
-        $this->addHeader('HTTP/1.1 301 Moved Permanently');
+    public function __construct(string $url, int $code = 302) {
+        parent::__construct($code);
         $this->addHeader('Location: '.$url);
     }
 

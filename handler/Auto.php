@@ -17,7 +17,7 @@ class Auto extends RequestHandler {
     public function get(): Response {
         list($name) = $this->input('name');
         if ($name == 'coreboot-mba51-flashing')
-            return new RedirectResponse('/coreboot-mba52-flashing/');
+            return new RedirectResponse('/coreboot-mba52-flashing/', 301);
 
         if (is_numeric($name)) {
             $post = posts::get((int)$name);
