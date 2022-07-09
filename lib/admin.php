@@ -41,7 +41,7 @@ class admin {
 
     public static function unsetCookie(): void {
         global $config;
-        setcookie(self::COOKIE_NAME, null, -1, '/', $config['cookie_host']);
+        setcookie(self::COOKIE_NAME, '', -1, '/', $config['cookie_host']);
     }
 
     public static function logAuth(): void {
