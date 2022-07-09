@@ -10,6 +10,9 @@ CONFIGURATION
 
 INSTALLATION
 
+	It uses https://github.com/sixlive/parsedown-highlight which you'll need to install using Composer, but since that
+	package's manifest is a bit outdated you have to pass `--ignore-platform-reqs` to composer.
+
 	TODO
 
 LOGGING
