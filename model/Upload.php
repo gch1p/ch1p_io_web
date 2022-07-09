@@ -142,7 +142,7 @@ class Upload extends Model {
                 if (is_file($dir.'/'.$f))
                     unlink($dir.'/'.$f);
                 else
-                    logError('deleteAllImagePreviews: '.$dir.'/'.$f.' is not a file!');
+                    logError(__METHOD__.': '.$dir.'/'.$f.' is not a file!');
                 $deleted++;
             }
         }

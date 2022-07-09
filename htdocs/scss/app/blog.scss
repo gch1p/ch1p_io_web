@@ -1,4 +1,4 @@
-@import 'vars';
+@import '../vars';
 
 .blog-write-link-wrap {
   margin-bottom: $base-padding;
@@ -81,7 +81,7 @@
   margin-bottom: 2px;
 }
 .blog-upload-item-info {
-  color: #888;
+  color: $grey;
   font-size: $fs - 2px;
 }
 .blog-upload-item-note {
@@ -102,7 +102,7 @@
 }
 
 .blog-post-date {
-  color: #888;
+  color: $grey;
   margin-top: 5px;
   font-size: $fs - 1px;
   > a {
@@ -168,7 +168,7 @@
     background-color: $code-block-bg;
 
     span.term-prompt {
-      color: #999;
+      color: $light-grey;
       @include user-select(none);
     }
   }
@@ -177,7 +177,7 @@
     border-left: 3px #e0e0e0 solid;
     margin-left: 0;
     padding: 5px 0 5px 12px;
-    color: #888;
+    color: $grey;
   }
 
   table.table-100 {
@@ -266,7 +266,7 @@
 .blog-post-comments {
   margin-top: $base-padding;
   padding: 12px 15px;
-  border: 1px #e0e0e0 solid;
+  border: 1px $border-color solid;
   @include radius(3px);
 }
 .blog-post-comments img {
@@ -317,7 +317,7 @@ td.blog-item-date-cell {
   padding-right: 10px;
 }
 .blog-item-date {
-  color: #777;
+  color: $grey;
   //text-transform: lowercase;
 }
 td.blog-item-title-cell {
@@ -344,6 +344,8 @@ td.blog-item-title-cell {
     padding-top: 0;
   }
 }
+
+/*
 a.blog-item-view-all-link {
   display: inline-block;
   padding: 4px 17px;
@@ -356,7 +358,7 @@ a.blog-item-view-all-link:hover {
   text-decoration: none;
   background-color: #ededed;
 }
-
+*/
 
 .blog-tags {
   float: right;
@@ -374,7 +376,7 @@ a.blog-item-view-all-link:hover {
   font-size: $fs - 1px;
 }
 .blog-tag-item > a {
-  color: #222;
+  color: $fg;
 }
 .blog-tag-item-count {
   color: #aaa;

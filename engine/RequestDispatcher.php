@@ -39,11 +39,14 @@ class RequestDispatcher {
             }
 
             $skin = new Skin();
-            $skin->static[] = '/css/common-bundle.css';
+            $skin->static[] = '/css/common.css';
             $skin->static[] = '/js/common.js';
 
+            $lang = LangData::getInstance();
+            $skin->addLangKeys($lang->search('/^theme_/'));
+
             /** @var RequestHandler $handler */
-            $handler = new $handler_class($skin, LangData::getInstance(), $router_input);
+            $handler = new $handler_class($skin, $lang, $router_input);
             $resp = $handler->beforeDispatch();
             if ($resp instanceof Response) {
                 $resp->send();

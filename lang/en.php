@@ -20,6 +20,11 @@ return [
     'delete' => 'delete',
     'info_saved' => 'Information saved.',
 
+    // theme switcher
+    'theme_auto' => 'auto',
+    'theme_dark' => 'dark',
+    'theme_light' => 'light',
+
     // contacts
     'contacts_email' => 'email',
     'contacts_pgp' => 'OpenPGP public key',

@@ -25,7 +25,12 @@ git reset --hard
 git pull origin master
 
 composer8.1 install --no-dev --optimize-autoloader --ignore-platform-reqs
-$PHP prepare_static.php
+
+if [ ! -d node_modules ]; then
+    npm i
+fi
+
+$PHP build_static.php
 
 cp "$DEV_DIR/config-local.php" .
 cat config-local.php  | grep -v is_dev | tee config-local.php >/dev/null

@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "clean-css": "^5.3.0",
+    "clean-css-cli": "^5.6.0",
+    "css-patch": "^1.2.0"
+  }
+}

@@ -23,11 +23,16 @@ class Skin {
         else
             $js = null;
 
+        $theme = ($_COOKIE['theme'] ?? 'auto');
+        if (!in_array($theme, ['auto', 'dark', 'light']))
+            $theme = 'auto';
+
         $layout_ctx = new SkinContext('\\skin\\base');
         $lang = $this->getLang();
         $lang = !empty($lang) ? json_encode($lang, JSON_UNESCAPED_UNICODE) : '';
         return new Response(200, $layout_ctx->layout(
             static: $this->static,
+            theme: $theme,
             title: $this->title,
             opts: $this->options,
             js: $js,

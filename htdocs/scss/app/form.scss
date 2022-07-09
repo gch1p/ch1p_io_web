@@ -1,4 +1,4 @@
-@import 'vars';
+@import '../vars';
 
 $form-field-label-width: 120px;
 
@@ -35,7 +35,7 @@ form { display: block; margin: 0; }
     font-size: 12px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: #888;
+    color: $grey;
   }
   .form-field {
     //margin-left: $form-field-label-width + 10px;

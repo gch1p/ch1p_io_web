@@ -1,0 +1,157 @@
+.head {
+  padding: 0 $side-padding;
+}
+.head-inner {
+  //padding: 13px 0;
+  position: relative;
+  border-bottom: 2px $border-color solid;
+}
+.head-logo {
+  padding: 4px 0;
+  font-family: $ffMono;
+  font-size: 15px;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  background-color: transparent;
+}
+body:not(.theme-changing) .head-logo {
+  @include transition(background-color, 0.03s);
+}
+.head-logo {
+  padding: 16px 0;
+  background-color: $bg;
+}
+.head-logo:after {
+  content: '';
+  display: block;
+  width: 40px;
+  position: absolute;
+  right: -40px;
+  top: 0;
+  bottom: 0;
+  border-left: 8px $bg solid;
+  box-sizing: border-box;
+  background: linear-gradient(to left, rgba($bg, 0) 0%, rgba($bg, 1) 100%); /* W3C */
+}
+.head-logo > a {
+  color: $fg;
+  font-size: 14px;
+}
+.head-logo > a:hover {
+  text-decoration: none;
+}
+.head-logo-enter {
+  background: $code-block-bg;
+  color: $hljs_fg;
+  display: inline;
+  opacity: 0;
+  font-size: 11px;
+  position: relative;
+  padding: 2px 5px;
+  font-weight: normal;
+  vertical-align: middle;
+  top: -1px;
+}
+body:not(.theme-changing) .head-logo-enter {
+  @include transition(opacity, 0.03s);
+}
+.head-logo-enter-icon {
+  width: 12px;
+  height: 7px;
+  display: inline-block;
+  margin-right: 5px;
+  position: relative;
+  top: 1px;
+
+  > svg {
+    path {
+      fill: $hljs_fg;
+    }
+  }
+}
+.head-logo > a:hover .head-logo-enter {
+  opacity: 1;
+}
+.head-logo-path {
+  color: $fg;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+body:not(.theme-changing) .head-logo-path {
+  @include transition(color, 0.03s);
+}
+.head-logo > a:hover .head-logo-path:not(.alwayshover) {
+  color: $light_grey;
+}
+.head-logo-path:not(.neverhover):hover {
+  color: $fg !important;
+}
+.head-logo-dolsign {
+  color: $head_green_color;
+  font-weight: normal;
+  &.is_root {
+    color: $head_red_color;
+  }
+}
+.head-logo-cd {
+  display: none;
+}
+.head-logo > a:hover .head-logo-cd {
+  display: inline;
+}
+.head-logo-path-mapped {
+  padding: 3px 5px;
+  background: #f1f1f1;
+  pointer-events: none;
+  @include radius(3px);
+  margin: 0 2px;
+}
+
+.head-items {
+  float: right;
+  color: #777; // color of separators
+  //padding: 8px 0;
+}
+a.head-item {
+  color: $fg;
+  font-size: $fs - 1px;
+  display: block;
+  float: left;
+  padding: 16px 0;
+
+  > span {
+    position: relative;
+    padding: 0 12px;
+    border-right: 1px $head-items-separator solid;
+
+    > span {
+      padding: 2px 0;
+
+      > span.moon-icon {
+        position: absolute;
+        left: 0;
+
+        > svg path {
+          fill: $fg;
+        }
+      }
+    }
+  }
+
+  &.is-theme-switcher > span {
+    padding-left: 20px;
+  }
+
+  &:last-child > span {
+    border-right: 0;
+    padding-right: 1px;
+  }
+}
+a.head-item:hover {
+  //color: $link-color;
+  text-decoration: none;
+}
+a.head-item:hover > span > span {
+  border-bottom: 1px $head-items-separator solid;
+}

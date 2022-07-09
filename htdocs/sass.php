@@ -4,7 +4,14 @@ require __DIR__.'/../init.php';
 global $config;
 
 $name = $_REQUEST['name'] ?? '';
-if (!$config['is_dev'] || !$name || !file_exists($path = ROOT.'/htdocs/scss/'.$name.'.scss')) {
+$theme = $_REQUEST['theme'] ?? '';
+
+if ($theme != 'light' && $theme != 'dark') {
+    http_response_code(403);
+    exit;
+}
+
+if (!$config['is_dev'] || !$name || !file_exists($path = ROOT.'/htdocs/scss/entries/'.$name.'/'.$theme.'.scss')) {
     // logError(__FILE__.': access denied');
     http_response_code(403);
     exit;

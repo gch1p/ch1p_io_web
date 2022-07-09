@@ -53,10 +53,12 @@ class SkinContext extends SkinBase {
         return call_user_func_array($fn, $arguments);
     }
 
-    public function __get(string $name) {
+    public function &__get(string $name) {
         $fn = $this->ns.'\\'.$name;
-        if (function_exists($fn))
-            return [$this, $name];
+        if (function_exists($fn)) {
+            $f = [$this, $name];
+            return $f;
+        }
 
         if (array_key_exists($name, $this->data))
             return $this->data[$name];
