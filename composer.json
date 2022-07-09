@@ -1,0 +1,14 @@
+{
+    "require": {
+      "sixlive/parsedown-highlight": "^0.3.1",
+      "erusev/parsedown": "1.8.0-beta-5",
+      "ext-mbstring": "*",
+      "ext-gd": "*",
+      "ext-mysqli": "*",
+      "ext-json": "*",
+      "ext-sqlite3": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "preferred-install": "dist"
+}

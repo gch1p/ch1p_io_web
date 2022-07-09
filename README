@@ -1,0 +1,21 @@
+This is complete code of ch1p.io website.
+
+REQUIREMENTS
+
+	PHP >= 8.1 with mysqli or sqlite3, gd
+
+CONFIGURATION
+
+	Should be done by copying config.php to config-local.php and modifying config-local.php.
+
+INSTALLATION
+
+	TODO
+
+LOGGING
+
+	TODO
+
+LICENSE
+
+	GPLv3

@@ -1,0 +1,352 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "cfed6325222efab0afd48dc69b6dd69b",
+    "packages": [
+        {
+            "name": "bhaktaraz/php-rss-generator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bhaktaraz/php-rss-generator.git",
+                "reference": "4c90e6e2fbb74f0dcb3cf6d1fcd4fa1a77b53f0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bhaktaraz/php-rss-generator/zipball/4c90e6e2fbb74f0dcb3cf6d1fcd4fa1a77b53f0d",
+                "reference": "4c90e6e2fbb74f0dcb3cf6d1fcd4fa1a77b53f0d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bhaktaraz\\RSSGenerator\\": "Source/Bhaktaraz/RSSGenerator/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bhaktaraz Bhatta",
+                    "email": "bhattabhakta@gmail.com"
+                }
+            ],
+            "description": "Simple RSS generator library for PHP 5.5 or later.",
+            "homepage": "https://github.com/bhaktaraz/php-rss-generator",
+            "keywords": [
+                "Facebook product feed generator",
+                "feed",
+                "generator",
+                "rss",
+                "writer"
+            ],
+            "time": "2019-01-08T12:17:22+00:00"
+        },
+        {
+            "name": "erusev/parsedown",
+            "version": "1.8.0-beta-5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "c26a2ee4bf8ba0270daab7da0353f2525ca6564a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/c26a2ee4bf8ba0270daab7da0353f2525ca6564a",
+                "reference": "c26a2ee4bf8ba0270daab7da0353f2525ca6564a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "time": "2018-06-11T18:15:32+00:00"
+        },
+        {
+            "name": "scrivo/highlight.php",
+            "version": "v9.15.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/scrivo/highlight.php.git",
+                "reference": "2626bf8731737b2487e54bda5a980f0e5a143320"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/scrivo/highlight.php/zipball/2626bf8731737b2487e54bda5a980f0e5a143320",
+                "reference": "2626bf8731737b2487e54bda5a980f0e5a143320",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8|^5.7",
+                "symfony/finder": "^2.8"
+            },
+            "suggest": {
+                "ext-dom": "Needed to make use of the features in the utilities namespace"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Highlight\\": "",
+                    "HighlightUtilities\\": ""
+                },
+                "files": [
+                    "HighlightUtilities/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Geert Bergman",
+                    "homepage": "http://www.scrivo.org/",
+                    "role": "Project Author"
+                },
+                {
+                    "name": "Vladimir Jimenez",
+                    "homepage": "https://allejo.io",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Martin Folkers",
+                    "homepage": "https://twobrain.io",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "Server side syntax highlighter that supports 185 languages. It's a PHP port of highlight.js",
+            "keywords": [
+                "code",
+                "highlight",
+                "highlight.js",
+                "highlight.php",
+                "syntax"
+            ],
+            "time": "2019-05-31T06:24:05+00:00"
+        },
+        {
+            "name": "sixlive/parsedown-highlight",
+            "version": "v0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sixlive/parsedown-highlight.git",
+                "reference": "e05632eea4cf97c865a17d2b65f31c5b477a6a7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sixlive/parsedown-highlight/zipball/e05632eea4cf97c865a17d2b65f31c5b477a6a7a",
+                "reference": "e05632eea4cf97c865a17d2b65f31c5b477a6a7a",
+                "shasum": ""
+            },
+            "require": {
+                "erusev/parsedown": "1.8.0-beta-5",
+                "php": "^7.1|7.2",
+                "scrivo/highlight.php": "^9.14"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.10",
+                "larapack/dd": "^1.0",
+                "phpunit/phpunit": "^6.0|^7.0",
+                "sempro/phpunit-pretty-print": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "sixlive\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "TJ Miller",
+                    "email": "oss@tjmiller.co",
+                    "homepage": "https://tjmiller.co",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Server side code block rendering for Parsedown",
+            "homepage": "https://github.com/sixlive/parsedown-highlight",
+            "keywords": [
+                "code",
+                "markdown",
+                "parsedown"
+            ],
+            "time": "2019-04-14T15:21:19+00:00"
+        },
+        {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "82ebae02209c21113908c229e9883c419720738a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
+                "reference": "82ebae02209c21113908c229e9883c419720738a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                },
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "time": "2019-02-06T07:57:58+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.42.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "671347603760a88b1e7288aaa9378f33687d7edf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/671347603760a88b1e7288aaa9378f33687d7edf",
+                "reference": "671347603760a88b1e7288aaa9378f33687d7edf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "require-dev": {
+                "psr/container": "^1.0",
+                "symfony/debug": "^2.7",
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.42-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "https://twig.symfony.com/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "https://twig.symfony.com",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2019-06-04T11:31:08+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "bhaktaraz/php-rss-generator": 20
+    },
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

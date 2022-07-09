@@ -1,0 +1,71 @@
+$fs: 16px;
+$fsMono: 85%;
+$ff: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+$ffMono: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+
+$base-width: 900px;
+//$sb-width: 120px;
+$side-padding: 25px;
+$base-padding: 18px;
+
+$footer-height: 64px;
+$head-green-color: #0bad19;
+$head-red-color: #ce1a1a;
+$link-color: #116fd4;
+
+$bg: #f7f7f7;
+$content-bg: #fff;
+$code-block-bg: #f3f3f3;
+$inline-code-block-bg: #f1f1f1;
+
+$fg: #222;
+$blue1: #729fcf;
+$blue2: #3465a4;
+$blue3: #204a87;
+$orange1: #fcaf3e;
+$orange2: #f57900;
+$orange3: #ce5c00;
+
+$light-bg: #464c4e;
+$dark-bg: #272C2D;
+$dark-fg: #999;
+
+$input-border: #e0e0e0;
+$input-border-focused: #e0e0e0;
+$input-bg: #f7f7f7;
+$border-color: #e0e0e0;
+
+$error-block-bg: #f9eeee;
+$error-block-fg: #d13d3d;
+
+$success-block-bg: #eff5f0;
+$success-block-fg: #2a6f34;
+
+@mixin radius($radius) {
+  -o-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin transition($property, $duration, $easing: linear) {
+	transition: $property $duration $easing;
+	-webkit-transition: $property $duration $easing;
+	-moz-transition: $property $duration $easing;
+}
+
+@mixin linearGradient($top, $bottom){
+  background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+}
+
+@mixin user-select($value) {
+  -moz-user-select: $value;
+  -webkit-user-select: $value;
+  user-select: $value;
+}

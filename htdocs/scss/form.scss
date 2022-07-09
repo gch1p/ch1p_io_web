@@ -1,0 +1,59 @@
+@import 'vars';
+
+$form-field-label-width: 120px;
+
+form { display: block; margin: 0; }
+
+.form-layout-h {
+  .form-field-wrap {
+    padding: 8px 0;
+  }
+  .form-field-label {
+    float: left;
+    width: $form-field-label-width;
+    text-align: right;
+    padding: 7px 0 0;
+  }
+  .form-field {
+    margin-left: $form-field-label-width + 10px;
+  }
+}
+
+.form-layout-v {
+  .form-field-wrap {
+    padding: 6px 0;
+  }
+  .form-field-wrap:first-child {
+    padding-top: 0;
+  }
+  .form-field-wrap:last-child {
+    padding-bottom: 0;
+  }
+  .form-field-label {
+    padding: 0 0 4px 4px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #888;
+  }
+  .form-field {
+    //margin-left: $form-field-label-width + 10px;
+  }
+}
+
+.form-error {
+  padding: 10px 13px;
+  margin-bottom: $base-padding;
+  background-color: $error-block-bg;
+  color: $error-block-fg;
+  @include radius(3px);
+}
+
+.form-success {
+  padding: 10px 13px;
+  margin-bottom: $base-padding;
+  background-color: $success-block-bg;
+  color: $success-block-fg;
+  @include radius(3px);
+}

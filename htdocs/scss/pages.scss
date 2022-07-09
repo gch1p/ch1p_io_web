@@ -1,0 +1,14 @@
+.page {
+
+}
+.page-edit-links {
+  display: none;
+  float: right;
+  font-size: 15px;
+  > a {
+    margin-left: 5px;
+  }
+}
+.page-content-inner:hover .page-edit-links {
+  display: block;
+}

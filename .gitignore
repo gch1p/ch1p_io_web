@@ -1,0 +1,11 @@
+/debug.log
+test.php
+/.git
+/htdocs/css
+/node_modules/
+/vendor/
+.DS_Store
+._.DS_Store
+.sass-cache/
+config-static.php
+config-local.php
