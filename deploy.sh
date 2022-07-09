@@ -28,7 +28,7 @@ composer8.1 install --no-dev --optimize-autoloader --ignore-platform-reqs
 $PHP prepare_static.php
 
 cp "$DEV_DIR/config-local.php" .
-cat config-local.php  | grep -v is_dev | tee config-local.php
+cat config-local.php  | grep -v is_dev | tee config-local.php >/dev/null
 popd
 
 # copy staging to prod
