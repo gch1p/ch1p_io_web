@@ -24,7 +24,7 @@ fi
 git reset --hard
 git pull origin master
 
-composer8.1 install --no-dev --optimize-autoloader
+composer8.1 install --no-dev --optimize-autoloader --ignore-platform-reqs
 $PHP prepare_static.php
 
 cp "$DEV_DIR/config-local.php" .
