@@ -20,7 +20,6 @@ return [
     'uploads_dir' => '/home/user/files.example.com',
     'uploads_host' => 'files.example.com',
 
-    'sassc_bin' => '/usr/local/bin/sassc',
     'dirs_mode' => 0775,
     'files_mode' => 0664,
     'group' => 33, // id -g www-data
