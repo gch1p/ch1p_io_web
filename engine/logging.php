@@ -143,7 +143,7 @@ class logging {
         fclose($f);
 
         if ($set_perm)
-            setperm($f);
+            setperm(self::$logFile);
     }
 
     protected static function getPhpErrorName(int $errno): string {
