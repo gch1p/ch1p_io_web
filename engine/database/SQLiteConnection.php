@@ -2,7 +2,7 @@
 
 class SQLiteConnection extends CommonDatabase {
 
-    const SCHEMA_VERSION = 2;
+    const SCHEMA_VERSION = 0;
 
     protected SQLite3 $link;
 
@@ -21,18 +21,9 @@ class SQLiteConnection extends CommonDatabase {
             return;
 
         if ($cur < 1) {
-            $this->link->exec("CREATE TABLE users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT,
-                password TEXT
-            )");
+            // TODO
         }
-        if ($cur < 2) {
-            $this->link->exec("CREATE TABLE vk_processed (
-                last_message_time INTEGER
-            )");
-            $this->link->exec("INSERT INTO vk_processed (last_message_time) VALUES (0)");
-        }
+
         $this->syncSchemaVersion();
     }
 
