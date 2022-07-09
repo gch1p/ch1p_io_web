@@ -23,5 +23,5 @@ return [
     'dirs_mode' => 0775,
     'files_mode' => 0664,
     'group' => 33, // id -g www-data
-    'is_dev' => true,
+    'is_dev' => false,
 ];
