@@ -24,7 +24,10 @@ return <<<HTML
             $ctx->renderScript, $js, $unsafe_lang, $opts['dynlogo_enabled'])} 
     </body>
 </html>
-<!-- exec time: {$exec_time}s -->
+<!--
+    exec time: {$exec_time}s
+    looking for sources? check out https://git.ch1p.io/ch1p_io_web.git
+-->
 HTML;
 }
 
