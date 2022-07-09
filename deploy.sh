@@ -38,4 +38,5 @@ rsync -a --delete --delete-excluded --info=progress2 "$STAGING_DIR/" "$PROD_DIR/
     --exclude='/composer.*' \
     --exclude='/htdocs/scss' \
     --exclude='/htdocs/sass.php' \
-    --exclude='*.sh'
+    --exclude='*.sh' \
+    --exclude='*.sql'
