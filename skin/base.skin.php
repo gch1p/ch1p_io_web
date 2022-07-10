@@ -76,30 +76,29 @@ function renderStatic($ctx, $static, $theme) {
     $dark = $theme == 'dark';
     $ctx->styleNames = [];
     foreach ($static as $name) {
-        // list($name, $options) = $item;
-        $version = $config['is_dev'] ? time() : $config['static'][substr($name, 1)] ?? 'notfound';
+        // javascript
         if (str_ends_with($name, '.js'))
-            $html[] = jsLink($name, $version);
+            $html[] = jsLink($name);
+
+        // cs
         else if (str_ends_with($name, '.css')) {
-            $html[] = cssLink($name, 'light', $version, $style_name);
+            $html[] = cssLink($name, 'light', $style_name);
             $ctx->styleNames[] = $style_name;
 
             if ($dark)
-                $html[] = cssLink($name, 'dark', $version, $style_name);
+                $html[] = cssLink($name, 'dark', $style_name);
             else if (!$config['is_dev'])
-                $html[] = cssPrefetchLink(str_replace('.css', '_dark.css', $name), $version);
+                $html[] = cssPrefetchLink(str_replace('.css', '_dark.css', $name));
         }
     }
     return implode("\n", $html);
 }
 
-function jsLink(string $name, $version = null): string {
-    if ($version !== null)
-        $name .= '?'.$version;
-    return '<script src="'.$name.'" type="text/javascript"></script>';
+function jsLink(string $name): string {
+    return '<script src="'.$name.'?'.getStaticVersion($name).'" type="text/javascript"></script>';
 }
 
-function cssLink(string $name, string $theme, $version = null, &$bname = null): string {
+function cssLink(string $name, string $theme, &$bname = null): string {
     global $config;
 
     $dname = dirname($name);
@@ -108,23 +107,31 @@ function cssLink(string $name, string $theme, $version = null, &$bname = null): 
         $bname = substr($bname, 0, $pos);
 
     if ($config['is_dev']) {
-        $href = '/sass.php?name='.urlencode($bname).'&amp;theme='.$theme;
+        $href = '/sass.php?name='.urlencode($bname).'&amp;theme='.$theme.'&amp;v='.time();
     } else {
-        $href = $dname.'/'.$bname.($theme == 'dark' ? '_dark' : '').'.css'.($version !== null ? '?'.$version : '');
+        $version = getStaticVersion('css/'.$bname.($theme == 'dark' ? '_dark' : '').'.css');
+        $href = $dname.'/'.$bname.($theme == 'dark' ? '_dark' : '').'.css?'.$version;
     }
+
     $id = 'style_'.$bname;
     if ($theme == 'dark')
         $id .= '_dark';
+
     return '<link rel="stylesheet" id="'.$id.'" type="text/css" href="'.$href.'">';
 }
 
-function cssPrefetchLink(string $name, $verison = null): string {
-$url = $name;
-if ($verison)
-    $url .= '?'.$verison;
-return <<<HTML
+function cssPrefetchLink(string $name): string {
+    $url = $name.'?'.getStaticVersion($name);
+    return <<<HTML
 <link rel="prefetch" href="{$url}" />
 HTML;
+}
+
+function getStaticVersion(string $name): string {
+    global $config;
+    if (str_starts_with($name, '/'))
+        $name = substr($name, 1);
+    return $config['is_dev'] ? time() : $config['static'][$name] ?? 'notfound';
 }
 
 function renderHeader($ctx, $theme, $unsafe_logo_html) {

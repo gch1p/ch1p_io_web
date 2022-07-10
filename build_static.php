@@ -84,6 +84,7 @@ function build_static(): void {
             $hashes[$name] = gethash($file);
         }
     }
+    logInfo($hashes);
 
     // 4. write config-static.php
     $scfg = "<?php\n\n";
