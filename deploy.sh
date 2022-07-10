@@ -30,10 +30,11 @@ if [ ! -d node_modules ]; then
     npm i
 fi
 
-$PHP build_static.php
-
 cp "$DEV_DIR/config-local.php" .
 sed -i '/is_dev/d' ./config-local.php
+
+$PHP build_static.php
+
 popd
 
 # copy staging to prod
