@@ -20,11 +20,11 @@ $input-border-focused: #48535a;
 $input-bg: #30373b;
 $border-color: #48535a;
 
-$error-block-bg: #f9eeee;
-$error-block-fg: #d13d3d;
+$error-block-bg: #882b2b;
+$error-block-fg: $fg;
 
-$success-block-bg: #eff5f0;
-$success-block-fg: #2a6f34;
+$success-block-bg: #2a4b2d;
+$success-block-fg: $fg;
 
 $head-items-separator: #5e6264;
 
