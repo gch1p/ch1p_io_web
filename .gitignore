@@ -9,3 +9,4 @@ test.php
 .sass-cache/
 config-static.php
 config-local.php
+/.idea
