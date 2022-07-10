@@ -56,13 +56,8 @@ function build_static(): void {
         foreach ($entries as $entry) {
             $input = ROOT.'/htdocs/scss/entries/'.$entry.'/'.$theme.'.scss';
             $output = $css_dir.'/'.$entry.($theme == 'dark' ? '_dark' : '').'.css';
-            if (sassc($input, $output) != 0) {
+            if (sassc($input, $output) != 0)
                 fwrite(STDERR, "error: could not compile entries/$entry/$theme.scss\n");
-                continue;
-            }
-
-            // 1.1. apply clean-css optimizations and transformations
-            clean_css($output);
         }
     }
 
@@ -71,6 +66,10 @@ function build_static(): void {
         $light_file = $css_dir.'/'.$entry.'.css';
         $dark_file = str_replace('.css', '_dark.css', $light_file);
         dark_diff($light_file, $dark_file);
+
+        // 2.1. apply cleancss (must be done _after_ css-patch)
+        clean_css($light_file);
+        clean_css($dark_file);
     }
 
     // 3. calculate hashes
