@@ -33,7 +33,7 @@ fi
 $PHP build_static.php
 
 cp "$DEV_DIR/config-local.php" .
-cat config-local.php  | grep -v is_dev | tee config-local.php >/dev/null
+sed -i '/is_dev/d' ./config-local.php
 popd
 
 # copy staging to prod
