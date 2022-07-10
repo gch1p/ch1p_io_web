@@ -39,8 +39,8 @@ class RequestDispatcher {
             }
 
             $skin = new Skin();
-            $skin->static[] = '/css/common.css';
-            $skin->static[] = '/js/common.js';
+            $skin->static[] = 'css/common.css';
+            $skin->static[] = 'js/common.js';
 
             $lang = LangData::getInstance();
             $skin->addLangKeys($lang->search('/^theme_/'));

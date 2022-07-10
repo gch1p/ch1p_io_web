@@ -2,9 +2,9 @@
 
 set -e
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR="$( cd "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 
-DEV_DIR="${DIR}"
+DEV_DIR="$(realpath "$DIR/../")"
 STAGING_DIR="$HOME/staging"
 PROD_DIR="$HOME/prod"
 PHP=/usr/bin/php8.1
@@ -33,7 +33,9 @@ fi
 cp "$DEV_DIR/config-local.php" .
 sed -i '/is_dev/d' ./config-local.php
 
-$PHP build_static.php
+"$DIR"/build_js.sh -i "$DEV_DIR/htdocs/js" -o "$STAGING_DIR/htdocs/dist-js" || die "build_js failed"
+"$DIR"/build_css.sh -i "$DEV_DIR/htdocs/scss" -o "$STAGING_DIR/htdocs/dist-css" || die "build_css failed"
+$PHP "$DIR"/gen_static_config.php > "$STAGING_DIR/config-static.php" || die "gen_static_config failed"
 
 popd
 
@@ -43,6 +45,8 @@ rsync -a --delete --delete-excluded --info=progress2 "$STAGING_DIR/" "$PROD_DIR/
     --exclude debug.log \
     --exclude='/composer.*' \
     --exclude='/htdocs/scss' \
+    --exclude='/htdocs/js' \
     --exclude='/htdocs/sass.php' \
+    --exclude='/htdocs/js.php' \
     --exclude='*.sh' \
     --exclude='*.sql'

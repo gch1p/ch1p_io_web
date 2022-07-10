@@ -1,0 +1,1 @@
+var LS = window.localStorage;

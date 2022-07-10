@@ -63,8 +63,12 @@ class cli {
     }
 
     public static function die($error): void {
-        fwrite(STDERR, "error: {$error}\n");
+        self::error($error);
         exit(1);
+    }
+
+    public static function error($error): void {
+        fwrite(STDERR, "error: {$error}\n");
     }
 
 }

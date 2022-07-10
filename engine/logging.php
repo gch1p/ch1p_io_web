@@ -72,6 +72,9 @@ class logging {
     }
 
     public static function logCustom(LogLevel $level, ...$args): void {
+        global $config;
+        if (!$config['is_dev'] && $level == LogLevel::DEBUG)
+            return;
         self::write($level, self::strVars($args));
     }
 

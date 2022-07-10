@@ -1,35 +1,3 @@
-var LS = window.localStorage;
-
-var Draft = {
-    get: function() {
-        if (!LS) return null;
-
-        var title = LS.getItem('draft_title') || null;
-        var text = LS.getItem('draft_text') || null;
-
-        return {
-            title: title,
-            text: text
-        };
-    },
-
-    setTitle: function(text) {
-        if (!LS) return null;
-        LS.setItem('draft_title', text);
-    },
-
-    setText: function(text) {
-        if (!LS) return null;
-        LS.setItem('draft_text', text);
-    },
-
-    reset: function() {
-        if (!LS) return;
-        LS.removeItem('draft_title');
-        LS.removeItem('draft_text');
-    }
-};
-
 var AdminWriteForm = {
     form: null,
     previewTimeout: null,
@@ -170,24 +138,5 @@ var AdminWriteForm = {
         }
     }
 };
+
 bindEventHandlers(AdminWriteForm);
-
-var BlogUploadList = {
-    submitNoteEdit: function(action, note) {
-        if (note === null)
-            return;
-
-        var form = document.createElement('form');
-        form.setAttribute('method', 'post');
-        form.setAttribute('action', action);
-
-        var input = document.createElement('input');
-        input.setAttribute('type', 'hidden');
-        input.setAttribute('name', 'note');
-        input.setAttribute('value', note);
-
-        form.appendChild(input);
-        document.body.appendChild(form);
-        form.submit();
-    }
-};

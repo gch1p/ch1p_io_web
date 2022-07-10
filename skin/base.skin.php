@@ -45,11 +45,20 @@ function renderScript($ctx, $unsafe_js, $unsafe_lang, $enable_dynlogo) {
 global $config;
 
 $styles = json_encode($ctx->styleNames);
-$versions = !$config['is_dev'] ? json_encode($config['static']) : '{}';
+if ($config['is_dev'])
+    $versions = '{}';
+else {
+    $versions = [];
+    foreach ($config['static'] as $name => $v) {
+        list($type, $bname) = getStaticNameParts($name);
+        $versions[$type][$bname] = $v;
+    }
+    $versions = json_encode($versions);
+}
 
 return <<<HTML
 <script type="text/javascript">
-StaticManager.setStyles({$styles}, {$versions});
+StaticManager.init({$styles}, {$versions});
 {$ctx->if_true($unsafe_js, '(function(){'.$unsafe_js.'})();')}
 {$ctx->if_true($unsafe_lang, 'extend(__lang, '.$unsafe_lang.');')}
 {$ctx->if_true($enable_dynlogo, 'DynamicLogo.init();')}
@@ -77,40 +86,46 @@ function renderStatic($ctx, $static, $theme) {
     $ctx->styleNames = [];
     foreach ($static as $name) {
         // javascript
-        if (str_ends_with($name, '.js'))
+        if (str_starts_with($name, 'js/'))
             $html[] = jsLink($name);
 
-        // cs
-        else if (str_ends_with($name, '.css')) {
+        // css
+        else if (str_starts_with($name, 'css/')) {
             $html[] = cssLink($name, 'light', $style_name);
             $ctx->styleNames[] = $style_name;
 
             if ($dark)
                 $html[] = cssLink($name, 'dark', $style_name);
             else if (!$config['is_dev'])
-                $html[] = cssPrefetchLink(str_replace('.css', '_dark.css', $name));
+                $html[] = cssPrefetchLink($style_name.'_dark');
         }
+        else
+            logError(__FUNCTION__.': unexpected static entry: '.$name);
     }
     return implode("\n", $html);
 }
 
 function jsLink(string $name): string {
-    return '<script src="'.$name.'?'.getStaticVersion($name).'" type="text/javascript"></script>';
+    global $config;
+    list (, $bname) = getStaticNameParts($name);
+    if ($config['is_dev']) {
+        $href = '/js.php?name='.urlencode($bname).'&amp;v='.time();
+    } else {
+        $href = '/dist-js/'.$bname.'.js?'.getStaticVersion($name);
+    }
+    return '<script src="'.$href.'" type="text/javascript"></script>';
 }
 
 function cssLink(string $name, string $theme, &$bname = null): string {
     global $config;
 
-    $dname = dirname($name);
-    $bname = basename($name);
-    if (($pos = strrpos($bname, '.')))
-        $bname = substr($bname, 0, $pos);
+    list(, $bname) = getStaticNameParts($name);
 
     if ($config['is_dev']) {
         $href = '/sass.php?name='.urlencode($bname).'&amp;theme='.$theme.'&amp;v='.time();
     } else {
         $version = getStaticVersion('css/'.$bname.($theme == 'dark' ? '_dark' : '').'.css');
-        $href = $dname.'/'.$bname.($theme == 'dark' ? '_dark' : '').'.css?'.$version;
+        $href = '/dist-css/'.$bname.($theme == 'dark' ? '_dark' : '').'.css?'.$version;
     }
 
     $id = 'style_'.$bname;
@@ -121,17 +136,33 @@ function cssLink(string $name, string $theme, &$bname = null): string {
 }
 
 function cssPrefetchLink(string $name): string {
-    $url = $name.'?'.getStaticVersion($name);
-    return <<<HTML
+$url = '/dist-css/'.$name.'.css?'.getStaticVersion('css/'.$name.'.css');
+return <<<HTML
 <link rel="prefetch" href="{$url}" />
 HTML;
 }
 
+function getStaticNameParts(string $name): array {
+    $dname = dirname($name);
+    $bname = basename($name);
+    if (($pos = strrpos($bname, '.'))) {
+        $ext = substr($bname, $pos+1);
+        $bname = substr($bname, 0, $pos);
+    } else {
+        $ext = '';
+    }
+    return [$dname, $bname, $ext];
+}
+
 function getStaticVersion(string $name): string {
     global $config;
-    if (str_starts_with($name, '/'))
+    if ($config['is_dev'])
+        return time();
+    if (str_starts_with($name, '/')) {
+        logWarning(__FUNCTION__.': '.$name.' starts with /');
         $name = substr($name, 1);
-    return $config['is_dev'] ? time() : $config['static'][$name] ?? 'notfound';
+    }
+    return $config['static'][$name] ?? 'notfound';
 }
 
 function renderHeader($ctx, $theme, $unsafe_logo_html) {

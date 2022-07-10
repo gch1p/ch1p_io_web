@@ -1,7 +1,6 @@
 /debug.log
 test.php
 /.git
-/htdocs/css
 /node_modules/
 /vendor/
 .DS_Store
@@ -10,3 +9,5 @@ test.php
 config-static.php
 config-local.php
 /.idea
+/htdocs/dist-css
+/htdocs/dist-js
