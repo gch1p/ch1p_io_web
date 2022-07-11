@@ -166,27 +166,40 @@ function getStaticVersion(string $name): string {
 }
 
 function renderHeader($ctx, $theme, $unsafe_logo_html) {
-    return <<<HTML
+$items = [
+    ['url' => 'javascript:void(0)', 'label' => $theme, 'label_id' => 'theme-switcher-label', 'theme_switcher' => true],
+    ['url' => '/', 'label' => 'blog'],
+    ['url' => '/projects/', 'label' => 'projects'],
+    ['url' => 'https://git.ch1p.io/?s=idle', 'label' => 'git'],
+    ['url' => '/misc/', 'label' => 'misc'],
+    ['url' => '/contacts/', 'label' => 'contacts'],
+    ['url' => '/', 'label' => 'blog'],
+];
+if (\admin::isAdmin())
+    $items[] = ['url' => '/admin/', 'label' => 'admin'];
+
+// here, items are rendered using for_each, so that there are no gaps (whitespaces) between tags
+
+return <<<HTML
 <div class="head base-width">
     <div class="head-inner clearfix">
         <div class="head-logo">{$unsafe_logo_html}</div>
         <div class="head-items clearfix">
-            <a class="head-item is-theme-switcher" href="javascript:void(0)" onclick="return ThemeSwitcher.next(event)">
-                <span>
-                    <span>
-                        <span class="moon-icon">{$ctx->renderMoonIcon()}</span><span id="theme-switcher-label">{$theme}</span>
-                    </span>
-                </span>
-            </a>
-            <a class="head-item" href="/"><span><span>blog</span></span></a>
-            <a class="head-item" href="/projects/"><span><span>projects</span></span></a>
-            <a class="head-item" href="https://git.ch1p.io/?s=idle"><span><span>git</span></span></a>
-            <a class="head-item" href="/misc/"><span><span>misc</span></span></a>
-            <a class="head-item" href="/contacts/"><span><span>contacts</span></span></a>
-            {$ctx->if_admin('<a class="head-item" href="/admin/"><span><span>admin</span></span></a>')}
+            {$ctx->for_each($items, fn($item) => $ctx->renderHeaderItem($item['url'], $item['label'], $item['label_id'], $item['theme_switcher']))}
         </div>
     </div>
 </div>
+HTML;
+}
+
+function renderHeaderItem($ctx, $url, $label, $label_id, $is_theme_switcher) {
+return <<<HTML
+<a class="head-item{$ctx->if_true($is_theme_switcher, ' is-theme-switcher')}" href="{$url}"{$ctx->if_true($is_theme_switcher, ' onclick="return ThemeSwitcher.next(event)"')}>
+    <span>
+        {$ctx->if_true($is_theme_switcher, '<span class="moon-icon">'.$ctx->renderMoonIcon().'</span>')}
+        <span{$ctx->if_true($label_id, ' id="'.$label_id.'"')}>{$label}</span>
+    </span>
+</a>
 HTML;
 }
 

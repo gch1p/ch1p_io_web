@@ -4,21 +4,31 @@ textarea {
   -webkit-overflow-scrolling: touch;
 }
 
+.head {
+  padding: 0;
+}
+
 // header
 .head-logo {
   position: static;
   display: block;
-  //padding-bottom: 6px;
-  // not very good fix:
   overflow: hidden;
   white-space: nowrap;
-  padding-bottom: 0;
+  padding: 18px $side-padding 7px;
 }
 .head-logo::after {
   display: none;
 }
 .head-items {
   float: none;
+  padding: 0 $side-padding 0 $side-padding - 2px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+a.head-item {
+  float: none;
+  display: inline-block;
 }
 a.head-item:hover,
 a.head-item:active {
@@ -27,9 +37,6 @@ a.head-item:active {
 a.head-item:last-child > span {
   border-right: 0;
   padding-right: 12px;
-}
-a.head-item:first-child > span {
-  padding-left: 1px;
 }
 
 // blog

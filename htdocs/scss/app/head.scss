@@ -7,7 +7,6 @@
   border-bottom: 2px $border-color solid;
 }
 .head-logo {
-  padding: 4px 0;
   font-family: $ffMono;
   font-size: 15px;
   display: inline-block;
@@ -110,8 +109,7 @@ body:not(.theme-changing) .head-logo-path {
 
 .head-items {
   float: right;
-  color: #777; // color of separators
-  //padding: 8px 0;
+  color: $dark-grey; // color of separators
 }
 a.head-item {
   color: $fg;
@@ -128,8 +126,10 @@ a.head-item {
     > span {
       padding: 2px 0;
 
-      > span.moon-icon {
+      &.moon-icon {
+        padding: 0;
         position: absolute;
+        top: 0;
         left: 0;
 
         > svg path {
@@ -152,6 +152,6 @@ a.head-item:hover {
   //color: $link-color;
   text-decoration: none;
 }
-a.head-item:hover > span > span {
+a.head-item:hover > span > span:not(.moon-icon) {
   border-bottom: 1px $head-items-separator solid;
 }
