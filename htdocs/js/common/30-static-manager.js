@@ -8,13 +8,15 @@ var StaticManager = {
     },
 
     loadStyle: function(name, theme, callback) {
-        var url;
+        var url, id;
         if (!window.appConfig.devMode) {
             if (theme === 'dark')
                 name += '_dark';
             url = '/css/'+name+'.css?'+this.versions.css[name];
+            id = 'style_'+name;
         } else {
             url = '/sass.php?name='+name+'&theme='+theme+'&v='+timestamp();
+            id = 'style_'+name+(theme === 'dark' ? '_dark' : '');
         }
 
         var el = document.createElement('link');
@@ -22,7 +24,7 @@ var StaticManager = {
         el.onload = callback;
         el.setAttribute('rel', 'stylesheet');
         el.setAttribute('type', 'text/css');
-        el.setAttribute('id', 'style_'+name);
+        el.setAttribute('id', id);
         el.setAttribute('href', url);
 
         document.getElementsByTagName('head')[0].appendChild(el);
