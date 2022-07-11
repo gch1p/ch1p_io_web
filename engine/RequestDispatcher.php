@@ -7,6 +7,8 @@ class RequestDispatcher {
     ) {}
 
     public function dispatch(): void {
+        global $config;
+
         try {
             if (!in_array($_SERVER['REQUEST_METHOD'], ['POST', 'GET']))
                 throw new NotImplementedException('Method '.$_SERVER['REQUEST_METHOD'].' not implemented');
@@ -27,7 +29,7 @@ class RequestDispatcher {
             $handler_class = 'handler\\'.$handler_class;
 
             if (!class_exists($handler_class))
-                throw new NotFoundException('Handler class "'.$handler_class.'" not found');
+                throw new NotFoundException($config['is_dev'] ? 'Handler class "'.$handler_class.'" not found' : '');
 
             $router_input = [];
             if (count($route) > 1) {

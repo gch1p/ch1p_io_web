@@ -29,10 +29,10 @@ return <<<HTML
     <head><title>$code $title</title></head>
     <body>
         <center><h1>$code $title</h1></center>
+        <hr>
         {$ctx->if_true($message, 
-            '<hr><p align="center">'.$message.'</p>'
+            '<p align="center">'.$message.'</p>'
         )}
-        
     </body>
 </html>
 HTML;
