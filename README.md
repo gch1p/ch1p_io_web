@@ -25,7 +25,7 @@ This is complete code of ch1p.io website.
  - secure:
 	- CSRF protection
 	- automatic XSS protection in templates
-	- see the "BUG BOUNTY" section below
+	- see [this section](#bug-bounty) below
 
 ## Requirements
 
