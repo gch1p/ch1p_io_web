@@ -173,7 +173,6 @@ $items = [
     ['url' => 'https://git.ch1p.io/?s=idle', 'label' => 'git'],
     ['url' => '/misc/', 'label' => 'misc'],
     ['url' => '/contacts/', 'label' => 'contacts'],
-    ['url' => '/', 'label' => 'blog'],
 ];
 if (\admin::isAdmin())
     $items[] = ['url' => '/admin/', 'label' => 'admin'];
