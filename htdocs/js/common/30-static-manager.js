@@ -28,7 +28,7 @@ var StaticManager = {
         if (!window.appConfig.devMode) {
             if (theme === 'dark')
                 name += '_dark';
-            url = '/css/'+name+'.css?'+this.versions.css[name];
+            url = '/dist-css/'+name+'.css?'+this.versions.css[name];
             id = 'style_'+name;
         } else {
             url = '/sass.php?name='+name+'&theme='+theme+'&v='+timestamp();
