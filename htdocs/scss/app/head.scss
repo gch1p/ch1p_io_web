@@ -7,6 +7,7 @@
   border-bottom: 2px $border-color solid;
 }
 .head-logo {
+  z-index: 5;
   font-family: $ffMono;
   font-size: 15px;
   display: inline-block;
