@@ -84,8 +84,8 @@ function contacts($ctx, $email) {
 return <<<HTML
 <table class="contacts" cellpadding="0" cellspacing="0">
     <tr>
-        <td class="wide" colspan="2" style="line-height: 170%; padding-bottom: 18px;">
-            Feel free to contact me by any of the following means:
+        <td colspan="2" style="line-height: 170%; padding-bottom: 18px;">
+            <div>Feel free to contact me by any of the following means:</div>
         </td>
     </tr>
     <tr>
