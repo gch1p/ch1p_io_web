@@ -73,9 +73,6 @@ ALTER TABLE `admin_log`
 ALTER TABLE `config`
   ADD PRIMARY KEY (`name`);
 
-ALTER TABLE `debug_log`
-  ADD PRIMARY KEY (`id`);
-
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`short_name`);
 
@@ -97,9 +94,6 @@ ALTER TABLE `uploads`
   ADD UNIQUE KEY `random_id` (`random_id`);
 
 ALTER TABLE `admin_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `debug_log`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `posts`
