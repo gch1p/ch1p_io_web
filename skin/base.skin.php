@@ -184,7 +184,7 @@ return <<<HTML
     <div class="head-inner clearfix">
         <div class="head-logo">{$unsafe_logo_html}</div>
         <div class="head-items clearfix">
-            {$ctx->for_each($items, fn($item) => $ctx->renderHeaderItem($item['url'], $item['label'], $item['label_id'], $item['theme_switcher']))}
+            {$ctx->for_each($items, fn($item) => $ctx->renderHeaderItem($item['url'], $item['label'], $item['label_id'] ?? null, $item['theme_switcher'] ?? false))}
         </div>
     </div>
 </div>
