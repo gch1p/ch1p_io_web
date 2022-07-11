@@ -23,8 +23,8 @@ class Skin {
         else
             $js = null;
 
-        $theme = ($_COOKIE['theme'] ?? 'auto');
-        if (!in_array($theme, ['auto', 'dark', 'light']))
+        $theme = themes::getUserTheme();
+        if ($theme != 'auto' && !themes::themeExists($theme))
             $theme = 'auto';
 
         $layout_ctx = new SkinContext('\\skin\\base');

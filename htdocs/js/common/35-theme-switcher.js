@@ -15,6 +15,11 @@ var ThemeSwitcher = (function() {
     var systemState = null;
 
     /**
+     * @type {function[]}
+     */
+    var changeListeners = [];
+
+    /**
      * @returns {boolean}
      */
     function isSystemModeSupported() {
@@ -71,6 +76,13 @@ var ThemeSwitcher = (function() {
         var onDone = function() {
             window.requestAnimationFrame(function() {
                 removeClass(document.body, 'theme-changing');
+                changeListeners.forEach(function(f) {
+                    try {
+                        f(dark)
+                    } catch (e) {
+                        console.error('[ThemeSwitcher->changeTheme->onDone] error while calling user callback:', e)
+                    }
+                })
             })
         };
 
@@ -171,7 +183,7 @@ var ThemeSwitcher = (function() {
             currentModeIndex = (currentModeIndex + 1) % modes.length;
             switch (modes[currentModeIndex]) {
                 case 'auto':
-                    if (systemState !== null)
+                    if (systemState !== null && systemState !== isDarkModeApplied())
                         changeTheme(systemState);
                     break;
 
@@ -190,6 +202,13 @@ var ThemeSwitcher = (function() {
             setCookie('theme', modes[currentModeIndex]);
 
             return cancelEvent(e);
+        },
+
+        /**
+         * @param {function} f
+         */
+        addOnChangeListener: function(f) {
+            changeListeners.push(f);
         }
     };
 })();

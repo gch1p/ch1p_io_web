@@ -22,8 +22,8 @@ class Post extends Model {
         $data['update_ts'] = $cur_ts;
 
         if ($data['md'] != $this->md) {
-            $data['html'] = \markup::markdownToHtml($data['md']);
-            $data['text'] = \markup::htmlToText($data['html']);
+            $data['html'] = markup::markdownToHtml($data['md']);
+            $data['text'] = markup::htmlToText($data['html']);
         }
 
         parent::edit($data);
@@ -31,15 +31,15 @@ class Post extends Model {
     }
 
     public function updateHtml() {
-        $html = \markup::markdownToHtml($this->md);
+        $html = markup::markdownToHtml($this->md);
         $this->html = $html;
 
         getDb()->query("UPDATE posts SET html=? WHERE id=?", $html, $this->id);
     }
 
     public function updateText() {
-        $html = \markup::markdownToHtml($this->md);
-        $text = \markup::htmlToText($html);
+        $html = markup::markdownToHtml($this->md);
+        $text = markup::htmlToText($html);
         $this->text = $text;
 
         getDb()->query("UPDATE posts SET text=? WHERE id=?", $text, $this->id);
@@ -81,10 +81,9 @@ class Post extends Model {
         return date('j F Y', $this->updateTs);
     }
 
-    public function getHtml(bool $retina): string {
+    public function getHtml(bool $is_retina, string $theme): string {
         $html = $this->html;
-        if ($retina)
-            $html = markup::htmlRetinaFix($html);
+        $html = markup::htmlImagesFix($html, $is_retina, $theme);
         return $html;
     }
 
@@ -173,9 +172,8 @@ class Post extends Model {
             foreach ($images[$u->randomId] as $s) {
                 list($w, $h) = $s;
                 list($w, $h) = $u->getImagePreviewSize($w, $h);
-                if ($u->createImagePreview($w, $h, $update)) {
+                if ($u->createImagePreview($w, $h, $update, $u->imageMayHaveAlphaChannel()))
                     $images_affected++;
-                }
             }
         }
 

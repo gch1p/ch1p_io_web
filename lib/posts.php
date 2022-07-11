@@ -23,6 +23,9 @@ class posts {
         return (int)$db->result($db->query($sql, $tag_id));
     }
 
+    /**
+     * @return Post[]
+     */
     public static function getPosts(int $offset = 0, int $count = -1, bool $include_hidden = false): array {
         $db = getDb();
         $sql = "SELECT * FROM posts";

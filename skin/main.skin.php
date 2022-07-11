@@ -116,12 +116,14 @@ HTML;
 // --------
 
 function page($ctx, $page_url, $short_name, $unsafe_html) {
-return <<<HTML
+$html = <<<HTML
 <div class="page">
     {$ctx->if_admin($ctx->pageAdminLinks, $page_url, $short_name)}
     <div class="blog-post-text">{$unsafe_html}</div>
 </div>
 HTML;
+
+return [$html, markdownThemeChangeListener()];
 }
 
 function pageAdminLinks($ctx, $url, $short_name) {
@@ -139,7 +141,7 @@ HTML;
 // ---------
 
 function post($ctx, $id, $title, $unsafe_html, $date, $visible, $url, $tags, $email, $urlencoded_reply_subject) {
-return <<<HTML
+$html = <<<HTML
 <div class="blog-post">
     <div class="blog-post-title">
         <h1>{$title}</h1>
@@ -158,6 +160,8 @@ return <<<HTML
     {$ctx->langRaw('blog_comments_text', $email, $urlencoded_reply_subject)}
 </div>
 HTML;
+
+return [$html, markdownThemeChangeListener()];
 }
 
 function postAdminLinks($ctx, $url, $id) {
@@ -171,7 +175,32 @@ function postTag($ctx, $url, $name) {
 return <<<HTML
 <a href="{$url}"><span>#</span>{$name}</a>
 HTML;
+}
 
+function markdownThemeChangeListener() {
+return <<<JS
+ThemeSwitcher.addOnChangeListener(function(isDark) {
+    var nodes = document.querySelectorAll('.md-image-wrap');
+    for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        var alpha = parseInt(node.getAttribute('data-alpha'), 10);
+        if (!alpha)
+            continue;
+        var div = node.querySelector('a > div');
+        if (!div) {
+            console.warn('could not found a>div on this node:', node);
+            continue;
+        }
+        var style = div.getAttribute('style');
+        if (isDark) {
+            style = style.replace(/(a[\d]+x[\d]+)\.jpg/, '$1_dark.jpg');
+        } else {
+            style = style.replace(/(a[\d]+x[\d]+)_dark\.jpg/, '$1.jpg');
+        }
+        div.setAttribute('style', style);
+    }
+});
+JS;
 }
 
 

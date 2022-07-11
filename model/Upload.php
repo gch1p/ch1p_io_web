@@ -38,7 +38,8 @@ class Upload extends Model {
             $h *= 2;
         }
 
-        return 'https://'.$config['uploads_host'].'/'.$this->randomId.'/p'.$w.'x'.$h.'.jpg';
+        $prefix = $this->imageMayHaveAlphaChannel() ? 'a' : 'p';
+        return 'https://'.$config['uploads_host'].'/'.$this->randomId.'/'.$prefix.$w.'x'.$h.'.jpg';
     }
 
     // TODO remove?
@@ -73,6 +74,12 @@ class Upload extends Model {
         return in_array(extension($this->name), self::$ImageExtensions);
     }
 
+    // assume all png images have alpha channel
+    // i know this is wrong, but anyway
+    public function imageMayHaveAlphaChannel(): bool {
+        return strtolower(extension($this->name)) == 'png';
+    }
+
     public function isVideo(): bool {
         return in_array(extension($this->name), self::$VideoExtensions);
     }
@@ -94,36 +101,40 @@ class Upload extends Model {
         return [$w, $h];
     }
 
-    /**
-     * @param ?int $w
-     * @param ?int $h
-     * @param bool $update Whether to proceed if preview already exists
-     * @return bool
-     */
-    public function createImagePreview(?int $w = null, ?int $h = null, bool $update = false): bool {
+    public function createImagePreview(?int $w = null,
+                                       ?int $h = null,
+                                       bool $force_update = false,
+                                       bool $may_have_alpha = false): bool {
         global $config;
 
         $orig = $config['uploads_dir'].'/'.$this->randomId.'/'.$this->name;
         $updated = false;
 
-        for ($mult = 1; $mult <= 2; $mult++) {
-            $dw = $w * $mult;
-            $dh = $h * $mult;
-            $dst = $config['uploads_dir'].'/'.$this->randomId.'/p'.$dw.'x'.$dh.'.jpg';
+        foreach (themes::getThemes() as $theme) {
+            if (!$may_have_alpha && $theme == 'dark')
+                continue;
 
-            if (file_exists($dst)) {
-                if (!$update)
-                    continue;
-                unlink($dst);
+            for ($mult = 1; $mult <= 2; $mult++) {
+                $dw = $w * $mult;
+                $dh = $h * $mult;
+
+                $prefix = $may_have_alpha ? 'a' : 'p';
+                $dst = $config['uploads_dir'].'/'.$this->randomId.'/'.$prefix.$dw.'x'.$dh.($theme == 'dark' ? '_dark' : '').'.jpg';
+
+                if (file_exists($dst)) {
+                    if (!$force_update)
+                        continue;
+                    unlink($dst);
+                }
+
+                $img = imageopen($orig);
+                imageresize($img, $dw, $dh, themes::getThemeAlphaColorAsRGB($theme));
+                imagejpeg($img, $dst, $mult == 1 ? 93 : 67);
+                imagedestroy($img);
+
+                setperm($dst);
+                $updated = true;
             }
-
-            $img = imageopen($orig);
-            imageresize($img, $dw, $dh, [255, 255, 255]);
-            imagejpeg($img, $dst, $mult == 1 ? 93 : 67);
-            imagedestroy($img);
-
-            setperm($dst);
-            $updated = true;
         }
 
         return $updated;
@@ -138,7 +149,7 @@ class Upload extends Model {
         $files = scandir($dir);
         $deleted = 0;
         foreach ($files as $f) {
-            if (preg_match('/^p(\d+)x(\d+)\.jpg$/', $f)) {
+            if (preg_match('/^[ap](\d+)x(\d+)(?:_dark)?\.jpg$/', $f)) {
                 if (is_file($dir.'/'.$f))
                     unlink($dir.'/'.$f);
                 else

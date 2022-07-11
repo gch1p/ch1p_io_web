@@ -24,10 +24,9 @@ class Page extends Model {
         return $this->updateTs && $this->updateTs != $this->ts;
     }
 
-    public function getHtml(bool $retina): string {
+    public function getHtml(bool $is_retina, string $user_theme): string {
         $html = $this->html;
-        if ($retina)
-            $html = markup::htmlRetinaFix($html);
+        $html = markup::htmlImagesFix($html, $is_retina, $user_theme);
         return $html;
     }
 

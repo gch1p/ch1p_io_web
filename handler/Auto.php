@@ -68,7 +68,7 @@ class Auto extends RequestHandler {
         return $s->renderPage('main/post',
             title: $post->title,
             id: $post->id,
-            unsafe_html: $post->getHtml($this->isRetina()),
+            unsafe_html: $post->getHtml($this->isRetina(), \themes::getUserTheme()),
             date: $post->getFullDate(),
             tags: $tags,
             visible: $post->visible,
@@ -98,7 +98,7 @@ class Auto extends RequestHandler {
 
         $this->skin->title = $page ? $page->title : '???';
         return $this->skin->renderPage('main/page',
-            unsafe_html: $page->getHtml($this->isRetina()),
+            unsafe_html: $page->getHtml($this->isRetina(), \themes::getUserTheme()),
             page_url: $page->getUrl(),
             short_name: $page->shortName);
     }

@@ -26,9 +26,9 @@ $html = <<<HTML
 </form>
 HTML;
 
-$js = <<<JAVASCRIPT
+$js = <<<JS
 ge('as_password').focus();
-JAVASCRIPT;
+JS;
 
 return [$html, $js];
 }
@@ -264,9 +264,9 @@ $html = <<<HTML
 HTML;
 
 $js_params = json_encode(['pages' => true, 'edit' => $is_edit]);
-$js = <<<JAVASCRIPT
+$js = <<<JS
 AdminWriteForm.init({$js_params});
-JAVASCRIPT;
+JS;
 
 return [$html, $js];
 }

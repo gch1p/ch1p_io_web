@@ -57,6 +57,14 @@ function posts_html(): void {
     }
 }
 
+function posts_images(): void {
+    $kw = ['include_hidden' => true];
+    $posts = posts::getPosts(0, posts::getPostsCount(...$kw), ...$kw);
+    foreach ($posts as $p) {
+        $p->updateImagePreviews(true);
+    }
+}
+
 function pages_html(): void {
     $pages = pages::getAll();
     foreach ($pages as $p) {

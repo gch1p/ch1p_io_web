@@ -99,6 +99,7 @@ class MyParsedown extends ParsedownHighlight {
                 nolabel: $opts['nolabel'],
                 align: $opts['align'],
                 padding_top: round($h / $w * 100, 4),
+                may_have_alpha: $image->imageMayHaveAlphaChannel(),
 
                 url: $image_url,
                 direct_url: $image->getDirectUrl(),

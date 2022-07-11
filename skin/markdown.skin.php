@@ -14,14 +14,14 @@ HTML;
 
 function image($ctx,
                // options
-               $align, $nolabel, $w, $padding_top,
+               $align, $nolabel, $w, $padding_top, $may_have_alpha,
                // image data
                $direct_url, $url, $note) {
 return <<<HTML
 <div class="md-image align-{$align}">
-    <div class="md-image-wrap">
+    <div class="md-image-wrap" data-alpha="{$ctx->if_then_else($may_have_alpha, '1', '0')}">
         <a href="{$direct_url}">
-            <div style="background: #f2f2f2 url('{$url}') no-repeat; background-size: contain; width: {$w}px; padding-top: {$padding_top}%;"></div>
+            <div style="background: url('{$url}') no-repeat; background-size: contain; width: {$w}px; padding-top: {$padding_top}%;"></div>
         </a>
         {$ctx->if_true(
             $note != '' && !$nolabel, 

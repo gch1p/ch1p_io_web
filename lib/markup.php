@@ -16,12 +16,15 @@ class markup {
         return $text;
     }
 
-    public static function htmlRetinaFix(string $html): string {
+    public static function htmlImagesFix(string $html, bool $is_retina, string $user_theme): string {
         global $config;
+        $is_dark_theme = $user_theme === 'dark';
         return preg_replace_callback(
-            '/('.preg_quote($config['uploads_host'], '/').'\/\w{8}\/p)(\d+)x(\d+)(\.jpg)/',
-            function($match) {
-                return $match[1].(intval($match[2])*2).'x'.(intval($match[3])*2).$match[4];
+            '/('.preg_quote($config['uploads_host'], '/').'\/\w{8}\/)([ap])(\d+)x(\d+)(\.jpg)/',
+            function($match) use ($is_retina, $is_dark_theme) {
+                $mult = $is_retina ? 2 : 1;
+                $is_alpha = $match[2] == 'a';
+                return $match[1].$match[2].(intval($match[3])*$mult).'x'.(intval($match[4])*$mult).($is_alpha && $is_dark_theme ? '_dark' : '').$match[5];
             },
             $html
         );
