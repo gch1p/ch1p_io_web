@@ -1,5 +1,10 @@
 #!/bin/bash
 
+die() {
+    >&2 echo "error: $@"
+    exit 1
+}
+
 set -e
 
 DIR="$( cd "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
