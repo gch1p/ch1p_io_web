@@ -40,7 +40,7 @@ sed -i '/is_dev/d' ./config-local.php
 
 "$DIR"/build_js.sh -i "$DEV_DIR/htdocs/js" -o "$STAGING_DIR/htdocs/dist-js" || die "build_js failed"
 "$DIR"/build_css.sh -i "$DEV_DIR/htdocs/scss" -o "$STAGING_DIR/htdocs/dist-css" || die "build_css failed"
-$PHP "$DIR"/gen_static_config.php > "$STAGING_DIR/config-static.php" || die "gen_static_config failed"
+$PHP "$DIR"/gen_static_config.php -i "$STAGING_DIR/htdocs" > "$STAGING_DIR/config-static.php" || die "gen_static_config failed"
 
 popd
 
