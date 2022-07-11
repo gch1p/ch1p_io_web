@@ -68,7 +68,7 @@ check_args() {
     if [ ! -d "$OUTDIR" ]; then
         mkdir "$OUTDIR"
     else
-        warning "$OUTDIR already exists, erasing it"
+        # warning "$OUTDIR already exists, erasing it"
         rm "$OUTDIR"/*
     fi
 }
